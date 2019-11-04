@@ -1,0 +1,27 @@
+{% if section.settings.subheading != blank %}
+<p class="sub">{{ section.settings.subheading | escape }}</p>
+{% endif %}
+{% if section.settings.section_title != blank %}
+<label for="Email">{{ section.settings.section_title }}</label>
+{% endif %}
+{% if section.settings.text != blank %}
+{{ section.settings.text }}
+{% endif %} 
+{% form 'customer' %}
+{{ form.errors | default_errors }}
+{% if form.posted_successfully? %}
+  <p>{{ 'general.newsletter_form.confirmation' | t }}</p>
+{% else %}
+  <input type="hidden" name="contact[tags]" value="newsletter">
+  <input type="email"
+    name="contact[email]"
+    id="Email"
+    value="{% if customer.email != blank %}{{ customer.email }}{% endif %}"
+    placeholder="{{ 'general.newsletter_form.email_placeholder' | t }}"
+    autocorrect="off"
+    autocapitalize="off">
+  <button type="submit" name="commit" id="Subscribe">
+    <span>{{ 'general.newsletter_form.submit' | t }}</span>
+  </button>
+{% endif %}
+{% endform %}

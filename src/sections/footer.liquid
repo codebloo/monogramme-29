@@ -1,0 +1,127 @@
+<footer>
+  <div class="instagram">
+      {%- if section.settings.igtitle != blank -%}
+        <h2 class="setion__title">
+            {{ section.settings.igtitle }}
+        </h2>
+      {%- endif -%}
+      <div class="info">
+          <div id="igapp">
+            <ul class="ig__list">
+                <li v-for="ig in images">
+                    <a :href="ig.link">
+                        <img v-bind:src="ig.images.low_resolution.url" alt="">
+                    </a>
+                </li>
+            </ul>
+            {%- if section.settings.sub_title != blank -%}
+              <a class="ig__link" href="">follow us @MONOGRAMME29</a>
+              {%- endif -%} 
+          </div>
+      </div>
+    </div>
+  <div class="container">
+    <div class="links">
+        <div class="col">
+            {%- assign footer_linklist_2 = section.settings.footer_linklist -%}
+            {% if linklists[footer_linklist_2].links.size > 0 %}
+            <h4>Shop</h4>
+              <ul>
+                {% for link in linklists[footer_linklist_2].links %}
+                  <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+        </div>
+        <div class="col">
+            {%- assign footer_linklist = section.settings.footer_linklist_info -%}
+            {% if linklists[footer_linklist].links.size > 0 %}
+            <h4>Information</h4>
+              <ul>
+                {% for link in linklists[footer_linklist].links %}
+                  <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+        </div>
+        <div class="social">
+            {%- assign social_accounts = 'Facebook, Twitter, Pinterest, Instagram, Snapchat, Tumblr, YouTube, Vimeo,' | split: ', ' -%}
+            <h5>Where Trends <span>and</span> Classic Mingle</h5>
+            <ul>
+              <li>connect with us!</li>
+              {% for social in social_accounts %}
+                {%- assign social_handle = social | handleize -%}
+                {% capture social_link %}social_{{ social_handle }}_link{% endcapture %}
+                {% capture social_icon %}icon-{{ social_handle }}{% endcapture %}
+          
+                {% if settings[social_link] != blank %}
+                  <li>
+                    <a href="{{ settings[social_link] }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: social }}">
+                      {% include social_icon %}
+                      <span class="icon-fallback-text">{{ social }}</span>
+                    </a>
+                  </li>
+                {% endif %}
+          
+              {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="news">
+        {% include 'newsletter' %}
+    </div>    
+  </div>
+  <div class="bottom">
+      <a href="">PRIVACY POLICY</a>  |  <a href="">TERMS OF SERVICE</a>  |  <a href="">SITE BY AEOLIDIA</a>
+  </div>
+</footer>
+
+{% schema %}
+  {
+    "name": "Footer",
+    "settings": [
+      {
+        "type": "link_list",
+        "id": "footer_linklist",
+        "label": "First menu",
+        "default": "footer"
+      },
+      {
+        "type": "link_list",
+        "id": "footer_linklist_info",
+        "label": "Info menu",
+        "default": "footer"
+      },
+      {
+        "type": "text",
+        "id": "section_title",
+        "label": "Heading",
+        "default": "Subscribe to our newsletter"
+      },
+      {
+        "type": "text",
+        "id": "subheading",
+        "label": "Subheading",
+        "default": "A short sentence describing what someone will receive by subscribing"
+      },
+      {
+        "type": "richtext",
+        "id": "text",
+        "label": "text",
+        "default": "<p>A short sentence describing what someone will receive by subscribing</p>"
+      },
+      {
+        "type": "text",
+        "id": "igtitle",
+        "label": "Heading",
+        "default": "Instagram Heading"
+      },
+      {
+        "type": "text",
+        "id": "token",
+        "label": "Access Token"
+      }
+    ]
+  }
+
+{% endschema %}

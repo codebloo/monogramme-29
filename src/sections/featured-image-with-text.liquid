@@ -1,0 +1,81 @@
+{%- comment -%}
+  This is a required section for the Shopify Theme Store.
+  It is available when you add the "Image with text" section in the theme editor.
+
+  Theme Store required settings
+  - Image
+  - Heading: title of the block
+  - Text: description of the block
+
+  Theme Store optional settings
+  - Button label: label associated with the button
+  - Button link: link of the button
+{%- endcomment -%}
+
+<section class="image-with-text">
+    <div class="container">
+        <div class="image-with-text__image">
+            {% if section.settings.image != blank %}
+                <img src="{{ section.settings.image | img_url: '514x420' }}"/>
+            {% else %}
+                {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+            {% endif %}
+        </div>
+        <div class="image-with-text__text">
+            {% if section.settings.title != blank %}
+            <span>{{ section.settings.title | escape }}</span>
+            {% endif %}
+            {% if section.settings.text != blank %}
+                <div>
+                    {{ section.settings.text }}
+                    {% if section.settings.button_label != blank and section.settings.button_link != blank %}
+                    <a href="{{ section.settings.button_link }}">
+                        {{ section.settings.button_label | escape }}
+                    </a>
+                    {% endif %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+{% schema %}
+  {
+    "name": "Featured image with text",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Image with text"
+      },
+      {
+        "type": "richtext",
+        "id": "text",
+        "label": "Text",
+        "default": "<p>Pair large text with an image to give focus to your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>"
+      },
+      {
+        "type": "text",
+        "id": "button_label",
+        "label": "Button label"
+      },
+      {
+        "type": "url",
+        "id": "button_link",
+        "label": "Button link"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Featured image with text",
+        "category": "Image"
+      }
+    ]
+  }
+{% endschema %}

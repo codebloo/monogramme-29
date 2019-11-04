@@ -1,0 +1,87 @@
+.image-with-text {
+  position: relative;
+  padding: 0 0 100px 0;
+  div.container {
+    max-width: 1056px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 9;
+    padding: 0 15px;
+  }
+  &::before {
+    content: "";
+    background: #E2EDE6;
+    width: 100%;
+    height: 431px;
+    position: absolute;
+    bottom: 0;
+  }
+  &::after {
+    content: "";
+    background: url('../assets/svg/geen_bg.svg') 0 100% repeat-x;
+    width: 100%;
+    height: calc(100% - 135px);
+    position: absolute;
+    bottom: -9px;
+  }
+}
+
+.image-with-text__image {
+  img {
+    background: #fff;
+    padding: 15px;
+  }
+  @media (max-width: 1055px) {
+    flex: 0 0 50%;
+  }
+  @media (max-width: 600px) {
+    flex: 0 0 100%;
+  }
+}
+
+.image-with-text__text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 0 0 475px;
+  padding: 100px 0 0 75px;
+  span {
+    color: #42843E;
+    font-weight: 700;
+    display: block;
+    font-size: 13px;
+    letter-spacing: 1.75px;
+  }
+  p {
+    font-size: 1.875em;
+    font-family:  $font-heading;
+    margin: 23px 0;
+  }
+  a {
+    color: #F38781;
+    text-decoration: none;
+    display: inline-block;
+    font-weight: 700;
+    letter-spacing: 0.135em;
+    font-size: 15px;
+    &::after {
+      content: "";
+      width: 100%;
+      height: 1px;
+      @extend .gold-text;
+      display: block;
+      margin-top: 5px;
+    }
+  }
+  @media (max-width: 1055px) {
+    flex: 0 0 50%;
+  }
+  @media (max-width: 900px) {
+    padding: 25px 0 0 25px;
+  }
+  @media (max-width: 600px) {
+    flex: 0 0 100%;
+  }
+}

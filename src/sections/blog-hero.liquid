@@ -1,0 +1,60 @@
+<section class="hero">
+    <div>
+        {% if section.settings.image != blank %}
+            <img src="{{ section.settings.image | img_url: '840x' }}"/>
+        {% endif %}
+    </div>
+    <div class="content">
+        <div class="wrap">
+            {%- if section.settings.title != blank -%}
+                <h2>{{ section.settings.title }}</h2>
+            {%- endif -%}
+            {%- if section.settings.text != blank -%}
+                <div class="text">
+                {{ section.settings.text }}
+                </div>
+            {%- endif -%}
+            {% if section.settings.button_label != blank and section.settings.button_link != blank %}
+            <a href="{{ section.settings.button_link }}">
+              {{ section.settings.button_label | escape }}
+            </a>
+          {% endif %}
+        </div>
+
+    </div>
+</section>
+
+{% schema %}
+  {
+    "name": "Hero",
+    "settings": [
+    {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Talk about your brand"
+      },
+      {
+        "type": "richtext",
+        "id": "text",
+        "label": "Text",
+        "default": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>"
+      },
+      {
+        "type": "text",
+        "id": "button_label",
+        "label": "Button label"
+      },
+      {
+        "type": "url",
+        "id": "button_link",
+        "label": "Button link"
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,59 @@
+{%- comment -%}
+  This is a required section for the Shopify Theme Store.
+  It is available when you add "Newsletter" section on the Theme Editor.
+
+  Theme Store required settings
+  - Heading: title of the newsletter section
+  - Subheading: description of the newsletter section
+{%- endcomment -%}
+<section class="newsletter">
+  <div class="container">
+    <div class="image">
+        {% if section.settings.image != blank %}
+          <img src="{{ section.settings.image | img_url: '263x263' }}"/>
+        {% endif %}
+    </div>
+    <div>
+      {% include 'newsletter' %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "Newsletter",
+    "settings": [
+      {
+        "type": "text",
+        "id": "section_title",
+        "label": "Heading",
+        "default": "Subscribe to our newsletter"
+      },
+      {
+        "type": "text",
+        "id": "subheading",
+        "label": "Subheading",
+        "default": "A short sentence describing what someone will receive by subscribing"
+      },
+      {
+        "type": "richtext",
+        "id": "text",
+        "label": "text",
+        "default": "<p>A short sentence describing what someone will receive by subscribing</p>"
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+      {
+        "type": "paragraph",
+        "content": "Any customers who sign up will have an account created for them in Shopify. [View customers](/admin/customers?query=&accepts_marketing=1)"
+      }
+    ],
+    "presets": [{
+      "name": "Newsletter",
+      "category": "Promotional"
+    }]
+  }
+{% endschema %}

@@ -1,0 +1,41 @@
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: $font-body;
+  //font-weight: $font-body-weight;
+  font-style: $font-body-style;
+  font-size: 16px;
+  color: #231F20;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $font-heading;
+  font-weight: 400;
+}
+
+body,
+input,
+textarea,
+button,
+select {
+  -webkit-font-smoothing: antialiased;
+  text-size-adjust: 100%;
+}
+
+a:focus {
+  color: inherit;
+}
+@font-face {
+  font-family: 'suddenlyregular';
+  src: url('../assets/fonts/suddenly_regular-webfont.woff2') format('woff2'),
+       url('../assets/fonts/suddenly_regular-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}

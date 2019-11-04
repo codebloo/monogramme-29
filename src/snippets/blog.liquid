@@ -1,0 +1,49 @@
+<section class="blog">
+        <div class="container">
+            {% if section.settings.title != blank %}
+          <h2>{{ section.settings.title | escape }}</h2>
+        {% endif %}
+      
+        {%- assign blog = blogs[section.settings.blog] -%}
+      
+        {%- comment -%}
+          Due to accessibility requirements, the Blog entries list functions
+          as a list of content items. Non-visual users will expect lists of content
+          to appear in a list structure, allowing for easier understanding and navigation of list items.
+        {%- endcomment -%}
+        <ul class="blog-post">
+        {% for article in blogs[section.settings.blog].articles limit: 3 %}
+            <li class="blog-post__item">
+              {%- comment -%}
+                Due to accessibility requirements, we are regrouping all logical elements into the <a> element.
+                If a screen reader user is tabbing through the page, or browsing by links on the page with duplicated links,
+                they will appear identical which may lead to a confusing user experience.
+              {%- endcomment -%}
+              <a href="{{ article.url }}">
+                {% if article.image %}
+                  <img src="{{ article.image | img_url: '315x365', crop: 'center'}}">
+                {% endif %}
+                <h3>{{ article.title }}</h3>
+              </a>
+              <a class="more" href="{{ article.url }}" aria-label="{{ 'blogs.article.read_more_title' | t: title: article.title }}">{{ 'blogs.article.read_more' | t }}</a>
+            </li>
+          {% else %}
+            {% for i in (1..section.settings.post_limit) %}
+              <li class="blog-post__item">
+                <h3>
+                  <a href="#">{{ 'homepage.onboarding.blog_title' | t }}</a>
+                </h3>
+      
+                {% if section.settings.blog_show_author %}
+                  <span>{{ 'homepage.onboarding.blog_author' | t }}</span>
+                {% endif %}
+      
+                <div>{{ 'homepage.onboarding.blog_excerpt' | t }}</div>
+      
+                <a class="more" href="#">{{ 'blogs.article.read_more' | t }}</a>
+              </li>
+            {% endfor %}
+          {% endfor %}
+        </ul>
+        </div>
+      </section>

@@ -1,0 +1,189 @@
+<section class="text-section">
+  {%- if section.settings.about-title != blank -%}
+    <h2>{{ section.settings.about-title }}</h2>
+  {%- endif -%}
+  {%- if section.settings.text != blank -%}
+    <div class="rte">
+      {{ section.settings.text }}
+    </div>
+  {%- endif -%}
+</section>
+{% for block in section.blocks %}
+    {% case block.type %}
+    {% when 'textimage' %}
+        <section class="text-image {{ block.settings.layout }}">
+            <div class="image">
+                <img src="{{ block.settings.image | img_url: '311x' }}">
+            </div>
+            <div class="text">
+                <h3>{{ block.settings.title }}</h3>
+                {{ block.settings.content }}
+            </div>
+        </section>
+    {% when 'staff' %}
+        <div class="staff">
+            <div class="image">
+                <img src="{{ block.settings.image | img_url: '311x' }}">
+            </div>
+            <div class="text">
+                <h3>{{ block.settings.title }}</h3>
+                <span>{{ block.settings.role }}</span>
+                {{ block.settings.content }}
+            </div>
+        </div>
+    {% when 'title' %}
+        <div class="green-title">
+            <div class="wrap">
+                <h3>{{ block.settings.title }}</h3>
+                {{ block.settings.sub-title }}
+            </div>
+        </div>
+    {% when 'pagetitle' %}
+        <h3 class="page-title">{{ block.settings.title }}</h3>
+    {% when 'abbutton' %}
+        <a class="btn" href="">{{ block.settings.title }}</a>   
+    {% else %}
+        
+    {% endcase %}
+{% endfor %}
+
+{% include 'blog' %}
+
+{% schema %}
+  {
+    "name": "About Page",
+    "settings": [
+      {
+        "type": "text",
+        "id": "about-title",
+        "label": "Heading",
+        "default": "About Us"
+      },
+      {
+        "type": "richtext",
+        "id": "text",
+        "label": "Text",
+        "default": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Blog posts"
+      },
+      {
+        "id": "blog",
+        "type": "blog",
+        "label": "Blog"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "textimage",
+        "name": "Text and Image",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Heading"
+          },
+          {
+            "type": "richtext",
+            "id": "content",
+            "label": "Content"
+          },
+          {
+            "type": "select",
+            "id": "layout",
+            "label": "Image alignment",
+            "default": "left",
+            "options": [
+              {
+                "value": "left",
+                "label": "Left"
+              },
+              {
+                "value": "right",
+                "label": "Right"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "staff",
+        "name": "Staff",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Heading"
+          },
+          {
+            "type": "text",
+            "id": "role",
+            "label": "Role"
+          },
+          {
+            "type": "richtext",
+            "id": "content",
+            "label": "Content"
+          }
+        ]
+      },
+      {
+        "type": "title",
+        "name": "Title",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Heading"
+          },
+          {
+            "type": "richtext",
+            "id": "sub-title",
+            "label": "Sub Title"
+          }
+        ]
+      },
+      {
+        "type": "pagetitle",
+        "name": "Block Title",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Page Heading"
+          }
+        ]
+      },
+      {
+        "type": "abbutton",
+        "name": "Button",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+          },
+          {
+            "type": "url",
+            "id": "button",
+            "label": "Button Url"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,244 @@
+<section class="page-title">
+  {%- if section.settings.about-title != blank -%}
+    <h1>
+        {{ section.settings.about-title }}
+        <span>{{ section.settings.title }}</span>
+    </h1>
+  {%- endif -%}
+</section>
+{% for block in section.blocks %}
+    {% case block.type %}
+    {% when 'textimage' %}
+        <section class="text-image {{ block.settings.layout }}">
+            {% if block.settings.image != blank %}
+            <div class="image">
+                <img src="{{ block.settings.image | img_url: '353x' }}">
+            </div>
+            {% endif %}
+            <div class="text">
+                <h3>{{ block.settings.title }}</h3>
+                {{ block.settings.content }}
+                {% if block.settings.button_label != blank and block.settings.button_link != blank %}
+                    <a href="{{ block.settings.button_link }}">
+                    {{ block.settings.button_label | escape }}
+                    </a>
+              {% endif %}
+            </div>
+        </section>
+    {% when 'galleryf' %}
+        <div class="gallery">
+            {% if block.settings.image != blank %}
+            <div class="image">
+                <img src="{{ block.settings.image | img_url: '304x' }}">
+                {% if block.settings.title != blank %}
+                  <h3>{{ block.settings.title }}</h3>
+                {% endif %}
+                {% if block.settings.caption != blank %}
+                  <span>{{ block.settings.caption }}</span>
+                 {% endif %} 
+            </div>
+            {% endif %}
+            {% if block.settings.image_2 != blank %}
+            <div class="image">
+                <img src="{{ block.settings.image_2 | img_url: '304x' }}">
+                {% if block.settings.title_2 != blank %}
+                  <h3>{{ block.settings.title_2 }}</h3>
+                {% endif %}
+                {% if block.settings.caption_2 != blank %}
+                  <span>{{ block.settings.caption_2 }}</span>
+                 {% endif %} 
+            </div>
+            {% endif %}
+            {% if block.settings.image_3 != blank %}
+            <div class="image">
+                <img src="{{ block.settings.image_3 | img_url: '304x' }}">
+                {% if block.settings.title_3 != blank %}
+                  <h3>{{ block.settings.title_3 }}</h3>
+                {% endif %}
+                {% if block.settings.caption_3 != blank %}
+                  <span>{{ block.settings.caption_3 }}</span>
+                 {% endif %} 
+            </div>
+            {% endif %}
+        </div>
+    {% when 'title' %}
+        <div class="section-title">
+            <div class="wrap">
+                <h3>{{ block.settings.title }}</h3>
+                {{ block.settings.sub-title }}
+            </div>
+        </div>
+    {% when 'placement' %}
+    <div class="placement">
+        {% if block.settings.image_1 != blank %}
+            <div class="image">
+                <img src="{{ block.settings.image_1 | img_url: '170x' }}">
+            </div>
+        {% endif %}
+        {% if block.settings.image_2 != blank %}
+            <div class="image">
+                <img src="{{ block.settings.image_2 | img_url: '170x' }}">
+            </div>
+        {% endif %}
+        {% if block.settings.image_3 != blank %}
+            <div class="image">
+                <img src="{{ block.settings.image_3 | img_url: '170x' }}">
+            </div>
+        {% endif %}
+        {% if block.settings.image_4 != blank %}
+            <div class="image">
+                <img src="{{ block.settings.image_4 | img_url: '170x' }}">
+            </div>
+        {% endif %}
+        </div>
+    {% when 'abbutton' %}
+        <a class="btn" href="">{{ block.settings.title }}</a>   
+    {% else %}
+        
+    {% endcase %}
+{% endfor %}
+
+{% schema %}
+  {
+    "name": "Etiquette Page",
+    "settings": [
+      {
+        "type": "text",
+        "id": "about-title",
+        "label": "Heading",
+        "default": "About Us"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Description"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "textimage",
+        "name": "Text and Image",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Heading"
+          },
+          {
+            "type": "richtext",
+            "id": "content",
+            "label": "Content"
+          },
+          {
+            "type": "text",
+            "id": "button_label",
+            "label": "Button label"
+          },
+          {
+            "type": "url",
+            "id": "button_link",
+            "label": "Button link"
+          }
+        ]
+      },
+      {
+        "type": "galleryf",
+        "name": "Gallery",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Heading"
+          },
+          {
+            "type": "text",
+            "id": "caption",
+            "label": "Caption"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_2",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "title_2",
+            "label": "Heading"
+          },
+          {
+            "type": "text",
+            "id": "caption_2",
+            "label": "Caption"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_3",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "title_3",
+            "label": "Heading"
+          },
+          {
+            "type": "text",
+            "id": "caption_3",
+            "label": "Caption"
+          }
+        ]
+      },
+      {
+        "type": "title",
+        "name": "Title",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Heading"
+          },
+          {
+            "type": "richtext",
+            "id": "sub-title",
+            "label": "Sub Title"
+          }
+        ]
+      },
+      {
+        "type": "placement",
+        "name": "Placement Option",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image_1",
+            "label": "Image"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_2",
+            "label": "Image"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_3",
+            "label": "Image"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_4",
+            "label": "Image"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

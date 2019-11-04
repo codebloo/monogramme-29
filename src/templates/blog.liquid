@@ -1,0 +1,31 @@
+{% paginate blog.articles by 6 %}
+
+  {%- assign blog_title = blog.title -%}
+
+  {% if current_tags %}
+    {% capture blog_title %}{{ blog.title | link_to: blog.url }} &mdash; {{ current_tags.first }}{% endcapture %}
+  {% endif %}
+  <div class="blog">
+    {% section 'blog-hero' %}
+    <div class="posts">
+        {% for article in blog.articles %}
+        <div class="post">
+          {% if article.image %}
+            <a href="{{ article.url }}">
+                <img src="{{ article.image | img_url: '315x365', crop: 'center' }}"/>
+            </a>
+          {% endif %}
+          <h3>
+              <a href="{{ article.url }}">{{ article.title }}</a>
+          </h3>
+          <a class="read" href="{{ article.url }}">{{ 'blogs.article.read_more' | t }}</a> 
+        </div> 
+      {% endfor %}
+    </div>
+    
+      {% if paginate.pages > 1 %}
+        {% include 'pagination' %}
+      {% endif %}
+  </div>
+
+{% endpaginate %}
