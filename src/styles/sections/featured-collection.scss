@@ -38,15 +38,21 @@ header.collection__header {
 }
 div.collection {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   flex-wrap: wrap;
   max-width: 1200px;
-  padding: 0 15px;
+  padding: 40px 15px 0;
+  position:relative;
   margin: 0 auto;
-  > div {
+   @media (min-width:1026px) {justify-content:space-between;}
+  
+  
+  
+  > .collection-item {
     flex: 0 0 249px;
     text-align: center;
     margin-bottom: 30px;
+	padding: 10px;
     position: relative;
     .jdgm-prev-badge__text {
       display: none;

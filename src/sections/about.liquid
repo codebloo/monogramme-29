@@ -13,7 +13,14 @@
     {% when 'textimage' %}
         <section class="text-image {{ block.settings.layout }}">
             <div class="image">
+				{% if block.settings.stamp %} <img src="{{ 'monogram-stamp.png' | asset_url}}" class="monogram-stamp">{% endif %}
                 <img src="{{ block.settings.image | img_url: '311x' }}">
+				{% if block.settings.quote %} 
+				<div class="text-quote">
+					<span class="quote-text">{{block.settings.quote_text}}</span>
+					<span class="quote-author">{{block.settings.quote_author}}</span>
+				</div>
+				{% endif %}
             </div>
             <div class="text">
                 <h3>{{ block.settings.title }}</h3>
@@ -88,6 +95,12 @@
             "label": "Image"
           },
           {
+            "type": "checkbox",
+            "id": "stamp",
+            "label": "Add Gold Stamp"
+          },
+		  
+          {
             "type": "text",
             "id": "title",
             "label": "Heading"
@@ -97,6 +110,25 @@
             "id": "content",
             "label": "Content"
           },
+		  
+          {
+            "type": "checkbox",
+            "id": "quote",
+            "label": "Add Quote"
+          },
+		  
+          {
+            "type": "textarea",
+            "id": "quote_text",
+            "label": "Quote Text"
+          },
+          {
+            "type": "text",
+            "id": "quote_author",
+            "label": "Quote Author"
+          },
+        
+		  
           {
             "type": "select",
             "id": "layout",

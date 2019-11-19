@@ -1,3 +1,4 @@
+{% include 'breadcrumbs' %}
 {% paginate collection.products by 12 %}
   <header class="collection__header" role="banner">
     <h1>{{ collection.title }}</h1>
@@ -6,11 +7,15 @@
         {{ collection.description }}
       </div>
     {% endif %}
+
   </header>
 
   <div class="collection">
+	  <div class="collection-sorting">{% include 'collection-sorting' %}</div>
+
     {% for product in collection.products %}
-      <div>
+	{%- include 'bold-product' with product, hide_action: 'skip' -%}
+      <div class="collection-item">
         {% if product.featured_image != blank %}
           <a href="{{ product.url | within: collection }}">
             <img src="{{ product.featured_image | img_url: '249x249', crop: "top"}}" alt="{{ product.title }}">

@@ -7,7 +7,7 @@
   - Text: description of the rich text section
 {%- endcomment -%}
 <section class="hero">
-    <div>
+    <div class="hero-image-wrap">
         {% if section.settings.image != blank %}
             <img src="{{ section.settings.image | img_url: '840x' }}"/>
         {% endif %}

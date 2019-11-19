@@ -151,7 +151,7 @@
             {% endif %}
             <li>
                 <a href="/cart">
-                  {{ 'layout.cart.title' | t }}
+                  <span class="bag-title">{{ 'layout.cart.title' | t }}</span>
                   {% include 'icon-cart' %}
                 </a>
             </li>
@@ -163,7 +163,7 @@
     </div>
   </header>
 
-  <nav role="navigation">
+  <nav role="navigation" class="main-nav">
     <ul>
       {% for link in linklists[section.settings.menu].links %}
         {% if link.links != blank %}

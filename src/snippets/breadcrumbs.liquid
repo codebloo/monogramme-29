@@ -1,0 +1,75 @@
+<!-- /snippets/breadcrumb.liquid -->
+
+{% unless template == 'index' %}
+{% if template == 'search' %}
+
+  <nav class="breadcrumb" role="navigation" aria-label="breadcrumbs">
+  <a href="/" title="Home">Home</a>
+   |
+    <a href="/" title="search">Search</a>
+   |
+   <span class="current-crumb">{{ search.terms }}</span>
+  </nav>
+
+{% else %}
+
+<nav class="breadcrumb" role="navigation" aria-label="breadcrumbs">
+  <a href="/" title="Home">Home</a>
+
+  {% if template contains 'product' %}
+
+    {% if collection %}
+  |
+      {% if collection.handle %}
+        {% capture url %}/collections/{{ collection.handle }}{% endcapture %}
+        {{ collection.title | link_to: url }}
+      {% endif %}
+    {% endif %}
+    |
+    <span class="current-crumb">{{ product.title }}</span>
+
+  {% elsif template contains 'collection' and collection.handle %}
+
+    |
+    {% if current_tags %}
+      {% capture url %}/collections/{{ collection.handle }}{% endcapture %}
+      {{ collection.title | link_to: url }}
+      |
+      <span>{{ current_tags | join: " + " }}</span>
+    {% else %}
+      <span class="current-crumb">{{ collection.title }}</span>
+    {% endif %}
+
+  {% elsif template == 'blog' %}
+
+    |
+    {% if current_tags %}
+      {{ blog.title | link_to: blog.url }}
+      |
+      <span>{{ current_tags | join: " + " }}</span>
+    {% else %}
+    <span class="current-crumb">{{ blog.title }}</span>
+    {% endif %}
+
+  {% elsif template == 'article' %}
+
+    <|
+    {{ blog.title | link_to: blog.url }}
+    |
+    <span class="current-crumb">{{ article.title }}</span>
+
+  {% elsif template contains 'page' %}
+
+   |
+   <span class="current-crumb">{{ page.title }}</span>
+
+  {% else %}
+
+   <span aria-hidden="true"><i class="fas fa-circle"></i></span>
+   <span>{{ page_title }}</span>
+
+  {% endif %}
+</nav>
+
+  {% endif %}
+{% endunless %}

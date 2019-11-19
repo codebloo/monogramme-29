@@ -1,3 +1,7 @@
+
+$dakrness: #231F20;
+
+
 html {
   background-color: $color-body;
   box-sizing: border-box;
@@ -25,7 +29,9 @@ ul {
 div.top {
   height: 39px;
   color: #fff;
-  background: url('../assets/pattern-top.png') repeat-x;
+  background-image: url('../assets/bg-green.png');
+  background-repeat:repeat-x;;
+  background-size:29px 39px;
   text-align: center;
   font-size: 10px;
   display: flex;
@@ -51,16 +57,17 @@ header {
   margin-bottom: 30px;
   a {
     text-decoration: none;
-    color: #323031;
+    color: $dakrness;
     font-weight: 600;
-    letter-spacing : 1.75px;
   }
   ul {
+	  align-items:center;
     list-style: none;
     display: flex;
     li {
-      padding: 0 8px;
+      padding: 0 12px;
       a {
+		  display:block;
         font-size: 14px;
       }
       &:first-child {
@@ -69,10 +76,18 @@ header {
     }
     &.account {
       li {
+		  position:relative;
         a {
           font-family: $font-heading;
           font-weight: 400;
+		  
         }
+		.bag-title{padding-right: 6px;}
+		svg{
+		    position: absolute;
+		    right: -6px;
+		    top: -1px;
+		}
       }
       @media (max-width: 1075px) {
         display: none;
@@ -80,13 +95,14 @@ header {
     }
   }
   form {
+	button{background-color:transparent;}
     input {
       border: none;
       padding: 4px;
       font-size: 14px;
       font-family: $font-heading;
       font-style: italic;
-      color: #323031;
+      color: $dakrness;
     }
     position: relative;
     &::after {
@@ -206,7 +222,6 @@ nav {
   margin-top: 30px;
   padding-bottom: 25px;
   position: relative;
-  border-bottom: 1px solid #707070;
   ul {
     list-style: none;
     max-width: 1056px;
@@ -504,30 +519,40 @@ footer {
   margin: 200px 0 0 0;
   padding: 100px 0 0 0;
   div.instagram {
-    max-width: 897px;
+	  background-color:#fff;
+    max-width: 798px;
     margin: 0 auto;
     margin-top: -210px;
     margin-bottom: 50px;
     h2 {
-      text-align: center;
-      color: #42843E;
-      font-size: 11px;
+	     color: #42843E;
+		font-family: 'work sans';
+		 font-size: 11px;
+	   font-weight: 600;
+      text-align: center;     
       letter-spacing: 0.1em;
       margin: 0 0 25px 0;
-      i {
-        font-size: 17px;
+      span{
+		font-family:"Old Standard TT", serif;
+        font-size: 15px;
+	    font-style: italic;
+	    font-weight: 400;
       }
     }
     ul.ig__list {
       display: flex;
       flex-wrap: wrap;
       list-style: none;
-      justify-content: space-between;
-      background: #fff;
+      justify-content: center;
+ 
       padding: 15px;
       li {
+		  background: #fff;
         flex: 0 0 128px;
         text-align: center;
+		a{
+			display:block;
+			padding:0 5px;}
         img {
           width: 100%;
         }
@@ -547,11 +572,15 @@ footer {
     div.links {
       display: flex;
       flex-wrap: wrap;
-      border-right: 0.25px solid #323031;
+      border-right: 1px solid #c7c6c4;
       flex: 0 0 687px;
-      padding-right: 15px;
+      
+	  @media (min-width: 768px) {padding-right: 15px;}
+	  
       div.col {
         flex: 1;
+		margin-bottom:20px;
+		 @media (min-width: 768px) {margin-bottom: 0;}
         h4 {
           font-size: 19px;
           margin: 0 0 7px 0;
@@ -589,7 +618,9 @@ footer {
       }
       div.social {
         flex: 0 0 100%;
-        border-top: 0.25px solid #323031;
+        border-top: 1px solid #c7c6c4;
+  	  	.icon{
+			fill: url(#my-cool-gradient) #447799;}
         h5 {
           font-family: 'Work Sans', sans-serif;
           font-size: 1em;
@@ -641,8 +672,8 @@ footer {
     }
     div.news {
       text-align: center;
-      padding-left: 40px;
       flex: 1;
+	   @media (min-width: 600px) {padding-left: 40px;}
       p{
         font-size: 14px;
         margin: 0 0 20px 0;
@@ -675,7 +706,7 @@ footer {
         width: 158px;
         height: 36px;
         background: url('../assets/svg/newsletter-button.svg') no-repeat;
-        background-size: cover;
+        background-size: 100% auto;
         font-size: 9px;
         font-weight: 700;
         text-transform: uppercase;
@@ -725,7 +756,7 @@ div.about {
     width: 380px;
     height: 49px;
     background: url('../assets/svg/button_376x.svg') no-repeat;
-    background-size: cover;
+    background-size: 100% auto;
     margin: 0 auto;
     font-size: 13px;
     font-weight: 700;
@@ -736,6 +767,7 @@ div.about {
     margin-bottom: 30px;
     margin-top: 30px;
     letter-spacing: 0.25em;
+	    max-width: 100%;
   }
   section.blog {
     padding-top: 35px;
@@ -777,13 +809,15 @@ div.about {
     display: flex;
     align-items: center;
     justify-content: space-between;
+	flex-direction:column;
+	 @media (min-width:1024px) { flex-direction:row;}
     h3 {
       font-size: 23px;
       line-height: 1.5;
       margin: 0;
     }
     div.text {
-      flex: 0 0 539px;
+	   @media (min-width:1024px) { flex: 0 0 539px;}
       p {
         line-height: 1.5;
         font-weight: 300;
@@ -796,21 +830,50 @@ div.about {
     }
     div.image {
       flex: 0 0 313px;
+	  position:relative;
       img {
         padding: 18px;
         background: #F9F8F7;
+		&.monogram-stamp{
+			background:none;
+			left:-39px;
+			padding:0;
+			position:absolute;
+		    top: -35%;
+			@media (min-width:1024px) {left: -35%;}
+}
       }
+	  
+	  
+	  
     }
     &.right {
-      flex-direction: row-reverse;
+  	flex-direction:column;
+  	 @media (min-width:1024px) { flex-direction:row-reverse;}
       div.image {
         flex: 0 0 325px;
       }
       div.text {
-        flex: 0 0 538px;
+		@media (min-width:1024px) { flex: 0 0 538px;}
       }
     }
   }
+.text-quote{
+	color:#42843e;
+	span{
+		display:block;
+		text-align:center;}
+	.quote-text{
+		font-family: 'Old Standard', serif;
+		font-size:22px;
+		font-style:italic;
+		margin-bottom:10px;}
+	.quote-author{
+		font-family: 'Work Sans', sans-serif;
+		font-size:11px;
+		letter-spacing:0.5px;
+		text-transform:uppercase;}
+}
   div.staff {
     max-width: 920px;
     margin: 0 auto;
@@ -818,6 +881,8 @@ div.about {
     padding: 25px 0;
     justify-content: space-between;
     align-items: center;
+	flex-direction:column;
+	 @media (min-width:1024px) { flex-direction:row;}
     h3 {
       font-size: 21px;
       line-height: 1.5;
@@ -831,7 +896,8 @@ div.about {
       letter-spacing: 0.2em;
     }
     div.text {
-      flex: 0 0 505px;
+     
+	   @media (min-width:1024px) { flex: 0 0 505px;}
       p {
         line-height: 1.5;
         font-weight: 300;
@@ -1216,4 +1282,14 @@ div.cart {
   form {
     max-width: 100%;
   }
+}
+
+
+
+// HERO 
+.hero{
+	.hero-image-wrap{
+		img{ display: flex;}
+	}
+	
 }

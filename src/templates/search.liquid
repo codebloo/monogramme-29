@@ -1,5 +1,5 @@
 <div class="page search">
-{% paginate search.results by 10 %}
+{% paginate search.results by 12 %}
 
   <h1>
     {% if search.performed %}
@@ -32,6 +32,8 @@
       <h2 class="visually-hidden">{{ 'general.search.heading' | t: count: search.results_count }}</h2>
       <ul>
         {% for item in search.results %}
+		{%- include 'bold-product' with item, hide_action: 'skip' -%}
+		
           <li>
             <a href="{{ item.url | within: collection }}">
               {% assign featured_image = item.image | default: item.featured_image %}
