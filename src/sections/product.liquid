@@ -37,8 +37,9 @@
     <div class="info">
         <h1>{{ product.title }}</h1>
 		 <div class="price total-price bold_option_price_display">  {{ product.price | money }}</div>  
-		
-	   
+		{% comment %}
+	   This needs to be replaced with either Swatch Pug or the swatch snippet from Shopify, this is a temp solution to demo the LOOK to the client
+	   {% endcomment %}
 	          {% if tag contains 'napkin' or 'napkins' %}
 	              {% include 'napkin-colors' %}
 	          {% endif %}
