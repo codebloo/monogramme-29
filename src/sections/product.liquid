@@ -276,16 +276,18 @@
 
 .simple-animated-modal {
   border-color: #42843E;
+  left: 10%;
   text-align: center;
+  width: 80%;
 }
 
 .simple-animated-modal__content {
 
   .bold_option_value {
-    margin-right: 15px;
     display: inline-block;
     position: relative;
     width: 200px;
+    margin: 1% 2%;
   }
 
   .bold_option_value_swatch {
@@ -293,28 +295,37 @@
     height: 200px;
     width: 100%;
 
-    > {
+    &:hover {
+      cursor: pointer;
+    }
+
+    > span {
       background-size: cover;
     }
   }
 
   .bold_option_swatch_title {
+    color: inherit;
     font-family: Old Standard TT,serif;
     font-size: 1.25em;
+    margin-bottom: 0;
+    position: static;
+
+    &::after {
+      display: none;
+    }
+
+    span {
+      height: auto;
+      line-height: 1;
+      padding: 1em 0;
+    }
   }
 
   input[type="checkbox"] {
-    margin: 20px 0 30px;
-    text-align: center;
+    left: 0;
+    position: absolute;
     visibility: hidden;
-    width: 100%;
-
-    &::after {
-      content: attr(value);
-      font-family: Old Standard TT,serif;
-      font-size: 1.25em;
-      visibility: visible;
-    }
   }
 }
 {% endstylesheet %}
