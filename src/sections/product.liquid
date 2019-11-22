@@ -25,33 +25,29 @@
         {% if product.images.size > 1 %}
           <div class="slider">
             {% for image in product.images %}
-              
+
                 <a href="{{ image.src | img_url: '511x511' }}" data-thumbnail-id="{{ image.id }}" data-product-single-thumbnail{% if featured_image == image %} aria-current="true"{% endif %}>
                   <img class="product-single__thumbnail-image" src="{{ image.src | img_url: '118x118' }}" alt="{{ image.alt | escape }}">
                 </a>
-              
+
             {% endfor %}
             </div>
         {% endif %}
     </div>
     <div class="info">
         <h1>{{ product.title }}</h1>
-		 <div class="price total-price bold_option_price_display">  {{ product.price | money }}</div>  
-		{% comment %}
-	   This needs to be replaced with either Swatch Pug or the swatch snippet from Shopify, this is a temp solution to demo the LOOK to the client
-	   {% endcomment %}
+		 <div class="price total-price bold_option_price_display">  {{ product.price | money }}</div>
+
+
 	          {% if tag contains 'napkin' or 'napkins' %}
 	              {% include 'napkin-colors' %}
 	          {% endif %}
-	      
-		
-        
+
+
+
         {% include 'judgeme_widgets', widget_type: 'judgeme_preview_badge', jm_style: '', concierge_install: false %}
         {% form 'product', product, data-product-form: '', data-product-handle: product.handle, data-enable-history-state: 'true' %}
-     
- 
-      
-     
+
             <select name="id" id="productSelect" class="variants">
               {% for variant in product.variants %}
                 <option
@@ -61,15 +57,10 @@
                     {{ variant.title }}
                 </option>
               {% endfor %}
-             <div class="bold_options" data-product-id="{{ product.id }}"></div> 
             </select>
 
-		 	
-   
-      
-		 
-		  
-		  
+             <div class="bold_options" data-product-id="{{ product.id }}"></div>
+
           <div class="add-cart">
             <fieldset>
             <label for="Quantity">{{ 'products.product.quantity' | t }}</label>
@@ -90,7 +81,7 @@
             </span>
         </button>
           </div>
-      
+
         {% endform %}
         <div class="rte">
             {{ product.description }}
@@ -120,16 +111,16 @@
                 {% if count == 1 and block.settings.title != blank %}
                   <h4>{{ category }}</h4>
                   {% assign first_img_m = block.settings.image %}
-                {% elsif count == 1 %}  
+                {% elsif count == 1 %}
                   <h4><a class="example" href="{{ block.settings.image | img_url: '339x' }}">{{ category }}</a></h4>
                 {% endif %}
                 {% if block.settings.title != blank %}
                   <a class="example" href="{{ block.settings.image | img_url: '339x' }}">{{ block.settings.title }}</a>
-                {% endif %}  
+                {% endif %}
               {% endif %}
             {% endfor %}
           </div>
-          {% endfor %}   
+          {% endfor %}
       </div>
       <div class="col image">
         <a class="moretips" href="/pages/monogram-etiquette">More Tips for Monograms</a>
@@ -140,7 +131,7 @@
             <span class="caption">{{ block.settings.type | capitalize }} {{ block.settings.title }}</span>
             {% break %}
           {% endif %}
-        {% endfor %}  
+        {% endfor %}
       </div>
   </div>
 </section>
@@ -192,6 +183,8 @@
       </div>
     {% endif %}
   {% endif %}
+
+
 
 {% schema %}
   {
@@ -278,3 +271,50 @@
     });
   });
 {% endjavascript %}
+
+{% stylesheet 'scss' %}
+
+.simple-animated-modal {
+  border-color: #42843E;
+  text-align: center;
+}
+
+.simple-animated-modal__content {
+
+  .bold_option_value {
+    margin-right: 15px;
+    display: inline-block;
+    position: relative;
+    width: 200px;
+  }
+
+  .bold_option_value_swatch {
+    display: block;
+    height: 200px;
+    width: 100%;
+
+    > {
+      background-size: cover;
+    }
+  }
+
+  .bold_option_swatch_title {
+    font-family: Old Standard TT,serif;
+    font-size: 1.25em;
+  }
+
+  input[type="checkbox"] {
+    margin: 20px 0 30px;
+    text-align: center;
+    visibility: hidden;
+    width: 100%;
+
+    &::after {
+      content: attr(value);
+      font-family: Old Standard TT,serif;
+      font-size: 1.25em;
+      visibility: visible;
+    }
+  }
+}
+{% endstylesheet %}
