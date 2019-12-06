@@ -39,9 +39,9 @@
 		 <div class="price total-price bold_option_price_display">  {{ product.price | money }}</div>
 
 
-	          {% if tag contains 'napkin' or 'napkins' %}
-	              {% include 'napkin-colors' %}
-	          {% endif %}
+      {% if tag contains 'napkin' or 'napkins' %}
+        {% include 'napkin-colors' %}
+      {% endif %}
 
 
 
@@ -274,58 +274,56 @@
 
 {% stylesheet 'scss' %}
 
-.simple-animated-modal {
-  border-color: #42843E;
-  left: 10%;
+
+.swatch-popup li {
+  display: inline-block;
+  font-family: Old Standard TT,serif;
+  font-size: 1.25em;
+  list-style: none;
+  margin: 1% 2%;
+  padding-bottom: 2%;
+  position: relative;
   text-align: center;
-  width: 80%;
-}
+  width: 200px;
 
-.simple-animated-modal__content {
-
-  .bold_option_value {
-    display: inline-block;
-    position: relative;
-    width: 200px;
-    margin: 1% 2%;
+  &:hover {
+    cursor: pointer;
   }
 
-  .bold_option_value_swatch {
+  .swatch {
+    background-size: cover;
     display: block;
     height: 200px;
+    margin-bottom: 1em;
     width: 100%;
-
-    &:hover {
-      cursor: pointer;
-    }
-
-    > span {
-      background-size: cover;
-    }
   }
+}
+.bold_option_value_element:not(.bold_swatch_selected) {
+  opacity: 0.4;
+}
 
-  .bold_option_swatch_title {
-    color: inherit;
-    font-family: Old Standard TT,serif;
-    font-size: 1.25em;
-    margin-bottom: 0;
-    position: static;
+.bold_option_swatch .button.button--outline {
+  width: 80%;
+  position: relative;
 
-    &::after {
-      display: none;
-    }
-
-    span {
-      height: auto;
-      line-height: 1;
-      padding: 1em 0;
-    }
+  &.selected {
+    text-decoration: none;
   }
+}
 
-  input[type="checkbox"] {
-    left: 0;
-    position: absolute;
-    visibility: hidden;
-  }
+.selectedSwatch {
+  display: inline-block;
+  width: 50px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 50px;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  transform: translateX(10px);
+}
+
+.bold_option_swatch .bold_option_element {
+  display: none !important;
 }
 {% endstylesheet %}

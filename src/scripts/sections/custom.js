@@ -5,56 +5,89 @@
 
 /* The Bold Product Options container */
 const bold_el = document.querySelector('.bold_options');
+const popup_class = 'popup_options';
 
-/* Handler for customizing custom options (it's customizing all the way down) */
-const loadCustom = (newNode) => {
-  console.log('Fancifying custom option ...');
+// Convert swatches into a popup and button
+const loadSwatchPopup = ({ swatchContainer, option }) => {
 
-  console.log(newNode);
+  /* Unique ID from the title and a random number */
+  const title = option.querySelector('.bold_option_title').innerHTML;
+  const swatchCollectionID = `${title.toLowerCase().replace(/\s/g, '-').replace(/\W/g, '')}-${Math.floor(Math.random() * 100)}`;
 
-  const title = newNode[0].querySelector('.bold_option_title').innerText;
-  const dropdown = newNode[0].querySelector('select');
-  const swatch_collections = newNode[0].querySelectorAll('.bold_option_swatch');
+  /* Create popup content */
+  let swatchList = '<ul class="swatch-popup">';
 
-  /* Fix "Choose Choose" in dropdowns */
-  if (dropdown) dropdown[0].text = dropdown[0].text.replace("Choose Choose", "Choose");
-
-  /* Turn swatches into modal windows */
-  swatch_collections.forEach(swatch_container => {
-    const swatches = swatch_container.querySelector('.bold_option_element');
-    console.log(swatch_container, swatches);
-    /* Create a unique ID from the option title and a random number */
-    const swatch_collection_id = `${title.toLowerCase().replace(/\s/g, '-')}-${Math.floor(Math.random() * 100)}`;
-
-    /* Markup for a toggle button */
-    const toggle_button_html = `
-      <button class="button button--outline js-modal"
-       data-modal-prefix-class="simple-animated"
-       data-modal-title="${title}"
-       data-modal-content-id="${swatch_collection_id}"
-       data-modal-close-text=""
-       data-modal-close-title="Close window">
-        Click to select style
-      </button>`;
-
-    /* Hide the swatches collection and give it an ID for the toggle button to target */
-    swatches.id = swatch_collection_id;
-    swatches.classList.add('hidden');
-    // Add the toggle button
-    swatches.insertAdjacentHTML('beforebegin', toggle_button_html);
+  /* Copy swatch values */
+  [...swatchContainer.children].forEach((swatch, index) => {
+    const bgImg = swatch.querySelector('.bold_option_value_swatch span').style.backgroundImage;
+    const swatchImage = bgImg.replace('url(','').replace(')','').replace(/\"/gi, "");
+    const { className, value } = swatch.querySelector('input');
+    swatchList += `
+    <li data-value="${value}" data-classname="${className}" data-id="${swatchCollectionID}" data-image="${swatchImage}">
+      <div class="swatch" style="background-image: url('${swatchImage}')"></div>
+      ${value}
+    </li>`
   });
+  swatchList += `</ul>`;
 
+  // Insert the toggle button and popup content
+  swatchContainer.insertAdjacentHTML('beforebegin', `
+  <button class="button button--outline js-modal"
+  id="btn-${swatchCollectionID}"
+   data-modal-prefix-class="simple-animated"
+   data-modal-title="${title}"
+   data-modal-content-id="${swatchCollectionID}"
+   data-modal-close-text=""
+   data-modal-close-title="Close window">
+    Click to select style
+  </button>
+  <div class="selectedSwatch"></div>
+  <div class="hidden" id="${swatchCollectionID}">
+    ${swatchList}
+  </div>`);
+
+  // Mark the swatch container
+  swatchContainer.className += ` ${popup_class}`;
+}
+
+const fixDropdown = newNode => {
+  const dropdown = newNode.querySelector('select');
+  if (dropdown) dropdown[0].text = dropdown[0].text.replace("Choose Choose", "Choose");
 };
 
 // Watch the DOM for changes and do stuff with the changes
 const observer = new MutationObserver((mutations) => {
   mutations.forEach((mutation) => {
-    // Pass new HTML nodes to our schmancy handler
-    if (mutation.type === 'childList') loadCustom(mutation.addedNodes);
-  });
+    if (mutation.addedNodes.length > 0) {
+      mutation.addedNodes.forEach(newNode => {
+        // If it's a new set of swatches, make it a popup
+        const convertSwatchToPopup = newNode.classList && newNode.classList.contains('bold_option_element') && !newNode.classList.contains(popup_class);
+        if (convertSwatchToPopup) loadSwatchPopup({ swatchContainer: newNode, option: mutation.target });
+      });
+    }
+  })
 });
 
-// Tell the observer what to watch
+// Tell the observer what element to watch
 observer.observe(bold_el, {
-  childList: true
+  childList: true,
+  subtree: true
+});
+
+/* Select a swatch in the popup */
+$(document).on('click','.simple-animated-modal__wrapper li', function(){
+    const swatchValue = $(this).data('value');
+    const className = $(this).data('classname');
+    const itemId = $(this).data('id');
+    const swatchImage = $(this).data('image');
+
+    $(`button[data-modal-content-id="${itemId}"]`)
+      .attr('data-image', swatchImage)
+      .html(swatchValue)
+      .addClass('selected')
+      .next().css("background-image", `url('${swatchImage}')`);
+
+    $(`.${className}[value="${swatchValue}"]`).trigger('click');
+
+    $( "#js-modal-close" ).trigger( "click" );
 });
