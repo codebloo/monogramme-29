@@ -8,4 +8,12 @@
   text-decoration: none;
   user-select: none;
   appearance: none;
+
+  &.button--outline {
+    border: solid 1px currentColor;
+    padding: 1em;
+    width: 100%;
+    text-align: left;
+    text-decoration: underline;
+  }
 }
