@@ -1293,3 +1293,24 @@ div.cart {
 	}
 	
 }
+
+.text-center{text-align:center;}
+
+
+// Inspiration Gallery
+
+#our-monograms-amp-fonts,
+#inspiration-gallery{
+	#MainContent{padding-top:40px;}
+	h1{margin-bottom:40px;}
+}
+
+
+hr.page-divider{
+	background: linear-gradient(#887039 0%, #e6be76 50%, #887039 100%);
+	border:none;
+	color:transparent;
+	    display: block;
+	    height: 1px;
+	    width: 100%;
+}

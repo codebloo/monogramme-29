@@ -13,7 +13,7 @@
     {% endif %}
     <div class="items">
       {% for block in section.blocks %}  
-      <a href="{{ block.settings.url | default: "#" }}" class="collection-list-item" {{ block.shopify_attributes }}>
+      <a href="{{ block.settings.collection | default: "#" }}" class="collection-list-item" {{ block.shopify_attributes }}>
         {% if block.settings.image != blank %}
           <img src="{{ block.settings.image | img_url: '470x' }}"/>
         {% endif %}

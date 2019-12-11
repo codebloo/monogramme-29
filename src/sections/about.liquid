@@ -48,7 +48,7 @@
     {% when 'pagetitle' %}
         <h3 class="page-title">{{ block.settings.title }}</h3>
     {% when 'abbutton' %}
-        <a class="btn" href="">{{ block.settings.title }}</a>   
+		 <a class="btn" href="{{ block.settings.button }}">{{ block.settings.title }}</a> 
     {% else %}
         
     {% endcase %}

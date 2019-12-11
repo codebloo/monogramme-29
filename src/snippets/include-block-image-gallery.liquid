@@ -1,0 +1,72 @@
+<section class="image-gallery-block">
+	<div class="container">
+          <div class="image-gallery">
+           <div class="single-gallery-image thumbnail">
+              {% if block.settings.page_detail_image_1 %}
+                <a href="{{ block.settings.page_detail_image_1 | img_url: '1520x' }}" class="lightbox" rel="detail-gallery">
+                  <img  src="{{ block.settings.page_detail_image_1.src | img_url: '300x' }}"
+                        class="lazyload lazyload--fade-in"
+                        alt="{{ block.settings.page_detail_image_1.alt }}"
+                        style="max-width: {{- block.settings.page_detail_image_1.width -}}px;"
+                        data-sizes="auto"
+                        data-src="{{ block.settings.page_detail_image_1 | img_url: '2048x' }}"
+                        data-srcset=" {{ block.settings.page_detail_image_1 | img_url: '2048x' }} 2048w,
+                                      {{ block.settings.page_detail_image_1 | img_url: '1600x' }} 1600w,
+                                      {{ block.settings.page_detail_image_1 | img_url: '1200x' }} 1200w,
+                                      {{ block.settings.page_detail_image_1 | img_url: '1000x' }} 1000w,
+                                      {{ block.settings.page_detail_image_1 | img_url: '800x' }} 800w,
+                                      {{ block.settings.page_detail_image_1 | img_url: '600x' }} 600w,
+                                      {{ block.settings.page_detail_image_1 | img_url: '400x' }} 400w"
+                        />
+                </a>
+              {% else %}
+                {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+              {% endif %}
+            </div>
+            <div class="single-gallery-image thumbnail">
+              {% if block.settings.page_detail_image_2 %}
+                <a href="{{ block.settings.page_detail_image_2 | img_url: '1520x' }}" class="lightbox" rel="detail-gallery">
+                  <img  src="{{ block.settings.page_detail_image_2.src | img_url: '300x' }}"
+                        class="lazyload lazyload--fade-in"
+                        alt="{{ block.settings.page_detail_image_2.alt }}"
+                        style="max-width: {{- block.settings.page_detail_image_2.width -}}px;"
+                        data-sizes="auto"
+                        data-src="{{ block.settings.page_detail_image_2 | img_url: '2048x' }}"
+                        data-srcset=" {{ block.settings.page_detail_image_2 | img_url: '2048x' }} 2048w,
+                                      {{ block.settings.page_detail_image_2 | img_url: '1600x' }} 1600w,
+                                      {{ block.settings.page_detail_image_2 | img_url: '1200x' }} 1200w,
+                                      {{ block.settings.page_detail_image_2 | img_url: '1000x' }} 1000w,
+                                      {{ block.settings.page_detail_image_2 | img_url: '800x' }} 800w,
+                                      {{ block.settings.page_detail_image_2 | img_url: '600x' }} 600w,
+                                      {{ block.settings.page_detail_image_2 | img_url: '400x' }} 400w"
+                        />
+                </a>
+              {% else %}
+                {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+              {% endif %}
+            </div>
+            <div class="single-gallery-image thumbnail">
+              {% if block.settings.page_detail_image_3 %}
+                <a href="{{ block.settings.page_detail_image_3 | img_url: '1520x' }}" class="lightbox" rel="detail-gallery">
+                  <img  src="{{ block.settings.page_detail_image_3.src | img_url: '300x' }}"
+                        class="lazyload lazyload--fade-in"
+                        alt="{{ block.settings.page_detail_image_3.alt }}"
+                        style="max-width: {{- block.settings.page_detail_image_3.width -}}px;"
+                        data-sizes="auto"
+                        data-src="{{ block.settings.page_detail_image_3 | img_url: '2048x' }}"
+                        data-srcset=" {{ block.settings.page_detail_image_3 | img_url: '2048x' }} 2048w,
+                                      {{ block.settings.page_detail_image_3 | img_url: '1600x' }} 1600w,
+                                      {{ block.settings.page_detail_image_3 | img_url: '1200x' }} 1200w,
+                                      {{ block.settings.page_detail_image_3 | img_url: '1000x' }} 1000w,
+                                      {{ block.settings.page_detail_image_3 | img_url: '800x' }} 800w,
+                                      {{ block.settings.page_detail_image_3 | img_url: '600x' }} 600w,
+                                      {{ block.settings.page_detail_image_3 | img_url: '400x' }} 400w"
+                        />
+                </a>
+              {% else %}
+                {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+              {% endif %}
+            </div>
+          </div>
+      </div>
+  </section>
