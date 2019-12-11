@@ -19,12 +19,13 @@ const loadSwatchPopup = ({ swatchContainer, option }) => {
 
   /* Copy swatch values */
   [...swatchContainer.children].forEach((swatch, index) => {
-    const bgImg = swatch.querySelector('.bold_option_value_swatch span').style.backgroundImage;
-    const swatchImage = bgImg.replace('url(','').replace(')','').replace(/\"/gi, "");
     const { className, value } = swatch.querySelector('input');
+    const swatchOption = swatch.querySelector('.bold_option_value_swatch span');
+    const swatchImg = swatchOption ? swatchOption.style.backgroundImage.replace('url(','').replace(')','').replace(/\"/gi, "") : null;
+
     swatchList += `
-    <li data-value="${value}" data-classname="${className}" data-id="${swatchCollectionID}" data-image="${swatchImage}">
-      <div class="swatch" style="background-image: url('${swatchImage}')"></div>
+    <li data-value="${value}" data-classname="${className}" data-id="${swatchCollectionID}" data-image="${swatchImg}">
+      <div class="swatch"${swatchImg ? ` style="background-image: url('${swatchImg}')"` : ''}></div>
       ${value}
     </li>`
   });
@@ -79,13 +80,13 @@ $(document).on('click','.simple-animated-modal__wrapper li', function(){
     const swatchValue = $(this).data('value');
     const className = $(this).data('classname');
     const itemId = $(this).data('id');
-    const swatchImage = $(this).data('image');
+    const swatchBackground = $(this).data('image');
 
     $(`button[data-modal-content-id="${itemId}"]`)
-      .attr('data-image', swatchImage)
+      .attr('data-image', swatchBackground)
       .html(swatchValue)
       .addClass('selected')
-      .next().css("background-image", `url('${swatchImage}')`);
+      .next().css("background-image", swatchBackground ? `url('${swatchBackground}')` : 'none');
 
     $(`.${className}[value="${swatchValue}"]`).trigger('click');
 
