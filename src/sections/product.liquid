@@ -39,9 +39,6 @@
 		 <div class="price total-price bold_option_price_display">  {{ product.price | money }}</div>
 
 
-      {% if tag contains 'napkin' or 'napkins' %}
-        {% include 'napkin-colors' %}
-      {% endif %}
 
 
 
@@ -58,6 +55,7 @@
                 </option>
               {% endfor %}
             </select>
+			{% include 'panda-swatch' with 'product' %}
 
              <div class="bold_options" data-product-id="{{ product.id }}"></div>
 
