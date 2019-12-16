@@ -12,11 +12,15 @@ bold-options.css version 6
 
 
 .bold_options {
-            margin-bottom: 20px;
+  margin-bottom: 0px;
 }
 
 .bold_options:empty {
     display:none;
+}
+
+.template-product .bold_option_set .bold_option:last-of-type {
+    margin-bottom: 0px;
 }
 
 .bold_option_product_info {
@@ -83,6 +87,17 @@ bold-options.css version 6
 .bold_option_dropdownmulti .bold_option_element,
 .bold_option_textarea .bold_option_element {
     display: block;
+}
+
+.bold_option_dropdown select {
+    background-color: #fff;
+    border: none;
+    outline: 1px solid;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding: 1em 7.6em 1em 1em;
+    text-decoration: underline;
 }
 
 .bold_option_textboxmulti .bold_option_value {
@@ -216,17 +231,32 @@ bold-options.css version 6
 }
 
 /* default styles for the priced options total */
+.bold_option_total,
+.price-container {
+    font-family: "Old Standard TT", serif;
+    font-size: 23px;
+    font-style: italic;
+    color: #323031;
+    display: inline-block !important;
+}
+.bold_option_price_display.bold_option_total {
+    display: inline-block !important;
+}
 .bold_option_total > div {
-    padding: 5px 12px;
+    padding: 0;
     background: #fff;
     text-align: center;
 }
 
-.bold_option_total span {
-    color: #AD0000;
-    font-weight: bold;
+.bold_option_total span,
+.bold_option_price_display {
+    color: #42843E;
+    font-weight: normal;
     display: inline-block;
-    margin: 0 5px;
+    margin: 0.8em 5px 0em 5px;
+    font-family: "Old Standard TT", serif;
+    font-size: 29px;
+    font-style: normal;
 }
 
 /* custom styles for the priced options total */
@@ -384,6 +414,12 @@ bold-options.css version 6
           -webkit-transform: scale(1.0);
           transform: scale(1.0);
       }
+}
+
+
+
+.bold_option_swatch .bold_option_element {
+  display: none !important;
 }
 
 /* custom css */
