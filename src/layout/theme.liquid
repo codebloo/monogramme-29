@@ -59,6 +59,9 @@
   <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 
   {{ '//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js' | script_tag }}
+  {{ 'panda-swatches.css' | asset_url | stylesheet_tag }}
+  {{ 'option_selection.js' | shopify_asset_url | script_tag }}
+  
 </head>
 
 <body id="{{ page_title | handle }}" class="template-{{ template.name | handle }}">
